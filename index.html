@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pruebas ajax mphp y mysqli</title>
+	<meta charset="utf-8" >
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script >
+		$(document).ready(function(){
+			$("#enviar").click(function(e){
+			e.preventDefault();
+				var cedula1 = $("#cedula").val();
+				 nombre = $("#nombre").val();
+				alert(cedula1);
+				datos = { "cedula2":cedula1, "nombre":nombre};
+				$.ajax({
+					type:'POST',
+					url:'pruebas.php',
+					datatype:'JSON',
+					data:datos
+				
+				}).done(function(resultado){
+					var cedula = resultado.cedula,
+			nombre = resultado.nombre,
+			paterno = resultado.paterno,
+			materno = resultado.materno,
+			id = resultado.id;
+						$('#resultado').html(cedula+" "+nombre+" "+paterno+" "+materno+" "+id);
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="caja">
+	<label>id</label>
+		<input type="text" name="cedula" id="cedula">
+		<label>nombre</label>
+		<input type="text" name="nombre" id="nombre">
+		<input type="button" name="enviar" value="enviar" id="enviar">
+		
+	<div id="resultado">
+		
+	</div>
+	</div>
+
+
+</body>
+</html>

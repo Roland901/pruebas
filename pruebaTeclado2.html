@@ -1,0 +1,203 @@
+<html>
+	<head>
+		<title>Ejemplo de evento onKeyDown, onKeyUp y onKeyPress</title>
+		<meta charset="utf-8">
+ 
+		<script language='javascript'>
+ 			
+		    function numerosPuntos(nombre) {
+		    	var puntos=0;
+		   		var cadena="";
+				var keyup = document.getElementById(nombre).value;
+				cadena=cadena+keyup;
+				cadena=quitaTodoMenosNumerosPuntos(cadena);				
+				if (cadena==='' || cadena===undefined || cadena===null ) {
+					
+					cadena='0';
+				}
+				if (cadena==='.') {
+					cadena='0.'
+					puntos++;
+				}
+				for(var i=0;i<cadena.length;i++){
+					
+						if (cadena.charAt(i)==='.') {
+							puntos++;
+
+						}
+					
+				}
+				if (puntos>1) {
+					var punto=0 , cadena2='';
+					cadena=cadena.split('');
+					cadena2=cadena2.toString();
+					for (var x = 0; x < cadena.length; x++) {
+						if (cadena[x]==='.') {
+							if (punto < 1) {
+								punto++;
+								cadena2=cadena2+cadena[x];
+							}
+
+						}else{
+							
+							cadena2=cadena2+cadena[x];
+						}
+					}
+				cadena=cadena2;
+				}
+
+				if (cadena.charAt(0)==='0' && cadena.charAt(1)==='0') {
+					cadena='0';
+				}
+				if(cadena.charAt(0)==='0' && cadena.charAt(1)!=='0' && cadena.charAt(1)!=='' && cadena.charAt(1)!=='.'){
+					cadena=cadena.substring(1, cadena.length);
+
+				}
+
+				document.getElementById(nombre).value=cadena;
+
+				function quitaTodoMenosNumerosPuntos(cadena){
+			  	patron = /[^.0-9]/g,
+			    nuevoValor    = "",
+			    nuevaCadena = cadena.replace(patron, nuevoValor);
+				return nuevaCadena;
+				}
+		    }
+
+		    function soloNumeros(nombre){
+		    	var cadena="";
+				var keyup = document.getElementById(nombre).value;
+				cadena=cadena+keyup;
+				cadena=quitaTodoMenosNumeros(cadena);
+				if (cadena==='' || cadena===undefined || cadena===null ) {
+					
+					cadena='0';
+				}
+				if (cadena.charAt(0)==='0' && cadena.charAt(1)==='0') {
+					cadena='0';
+				}
+				if(cadena.charAt(0)==='0' && cadena.charAt(1)!=='0' && cadena.charAt(1)!=='' ){
+					cadena=cadena.substring(1, cadena.length);
+				}
+				document.getElementById(nombre).value=cadena;
+
+
+
+				function quitaTodoMenosNumeros(cadena){
+			  	patron = /[^0-9]/g,
+			    nuevoValor    = "",
+			    nuevaCadena = cadena.replace(patron, nuevoValor);
+				return nuevaCadena;
+				}
+		    }
+
+
+
+		    function soloLetras(nombre){
+		    	var cadena="";
+				var keyup = document.getElementById(nombre).value;
+				cadena=cadena+keyup;
+				cadena=quitaTodoMenosLetras(cadena);
+				document.getElementById(nombre).value=cadena;
+
+		    function quitaTodoMenosLetras(cadena){
+		  	patron = /[^a-zA-Z\süéáíóúñÑÁÉÍÓÚ.,:;]/g,
+		    nuevoValor  = "",
+		    nuevaCadena = cadena.replace(patron, nuevoValor);
+			return nuevaCadena;
+		}
+		    }
+
+
+		    function quitatodoMenosLetrasNumeros(nombre){
+		    	var cadena="";
+				var keyup = document.getElementById(nombre).value;
+				cadena=cadena+keyup;
+				cadena=quitaMenosLetrasNumeros(cadena);
+				document.getElementById(nombre).value=cadena;
+		    	function quitaMenosLetrasNumeros(cadena){
+		  	patron = /[^0-9a-zA-Z\süéáíóúñÑÁÉÍÓÚ.,;:-]/g,
+		    nuevoValor  = "",
+		    nuevaCadena = cadena.replace(patron, nuevoValor);
+			return nuevaCadena;
+		}
+		    }
+
+		    function numerosGuion(nombre){
+		    	var guion=0;
+		    	var guiones=0;
+		    	var cadena="";
+				var keyup = document.getElementById(nombre).value;
+				cadena=cadena+keyup;
+				cadena=quitaTodoMenosNumerosGuion(cadena);
+				if (cadena==='' || cadena===undefined || cadena===null ) {
+					
+					cadena='0';
+				}
+				if (cadena.charAt(0)==='0' && cadena.charAt(1)!=='0' && cadena.charAt(1)!=='-'&& cadena.charAt(1)!=='') {
+					alert("entro");
+					cadena=cadena.substring(1, cadena.length);
+				}				
+				if (cadena.charAt(0)==='0' && cadena.charAt(1)==='0') {
+					cadena='0';
+				}
+
+
+				for(var i=0;i<cadena.length;i++){
+					
+						if (cadena.charAt(i)==='-') {
+							guiones++;
+
+						}
+					
+				}
+
+				if (guiones>1) {
+					var guion=0 , cadena2='';
+					cadena=cadena.split('');
+					cadena2=cadena2.toString();
+					for (var x = 0; x < cadena.length; x++) {
+						if (cadena[x]==='-') {
+							if (guion < 1) {
+								guion++;
+								cadena2=cadena2+cadena[x];
+							}
+
+						}else{
+							
+							cadena2=cadena2+cadena[x];
+						}
+					}
+				cadena=cadena2;
+				}
+
+
+				document.getElementById(nombre).value=cadena;
+
+		    	function quitaTodoMenosNumerosGuion(cadena){
+			  	patron = /[^0-9-]/g,
+			    nuevoValor    = "",
+			    nuevaCadena = cadena.replace(patron, nuevoValor);
+				return nuevaCadena;
+				}
+		    }
+		
+
+		 </script>
+	</head>
+ 
+	<body>
+		<form>
+		 	numeros y puntos:
+		 	<input type="text" name="a" onkeyup="numerosPuntos('arriba')" id="arriba" />
+		 	<br>
+		 	numeros: <input type="text" name="b" onkeyup="soloNumeros('medioArriba')" id="medioArriba" />
+		 	<br>
+		 	letras y numeros: <input type="text" name="c" onkeyup="quitatodoMenosLetrasNumeros('medio')" id="medio">
+		 	<br>
+		 	letras: <input type="text" name="d" onkeyup="soloLetras('medioBajo')" id="medioBajo">
+		 	<br>
+		 	numeros y guion: <input type="text" name="e" onkeyup="numerosGuion('abajo')" id="abajo">
+		</form>
+	</body>
+</html>
